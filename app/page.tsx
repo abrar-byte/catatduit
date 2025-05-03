@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button"
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link"
 
-export default function Home() {
+export default async function Home() {
+  const supabase=await createClient()
+  const { data:{session}, error } = await supabase.auth.getSession();
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -38,7 +41,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="space-x-4">
-                <Link href="/register">
+                <Link href={!session?"/register":'/dashboard'}>
                   <Button size="lg">Get Started</Button>
                 </Link>
                 <Link href="/login">
