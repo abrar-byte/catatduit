@@ -3,6 +3,7 @@ import { TransactionFilters } from "@/components/transaction-filters"
 import { Button } from "@/components/ui/button"
 import { PlusCircle } from "lucide-react"
 import { AddTransactionDialog } from "@/components/add-transaction-dialog"
+import { Suspense } from "react"
 
 export default function TransactionsPage() {
   return (
@@ -16,8 +17,11 @@ export default function TransactionsPage() {
           </Button>
         </AddTransactionDialog>
       </div>
+      <Suspense>
+        
       <TransactionFilters />
       <TransactionList />
+      </Suspense>
     </div>
   )
 }
